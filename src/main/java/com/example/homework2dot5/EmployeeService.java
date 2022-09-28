@@ -2,22 +2,16 @@ package com.example.homework2dot5;
 
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class EmployeeService {
-    private List<Employee> employeeService = new ArrayList<>();
-
-    public EmployeeService(List<Employee> employeeService) {
-        this.employeeService = employeeService;
-    }
+    private final Map<String, Employee> employeeBook = new HashMap<>();
 
     public Employee addEmployee(String firstName, String lastName) {
         Employee temp = new Employee(firstName, lastName);
-        if (!employeeService.contains(temp)) {
-            employeeService.add(temp);
+        if (!employeeBook.containsKey(temp.toString())) {
+            employeeBook.put(temp.toString(), temp);
             return temp;
         } else {
             throw new EmployeeAlreadyAddedException("Такой сотрудник уже существует!");
@@ -26,22 +20,20 @@ public class EmployeeService {
 
     public Employee removeEmployee(String firstName, String lastName) {
         Employee temp = findEmployee(firstName, lastName);
-        employeeService.remove(temp);
+        employeeBook.remove(temp.toString());
         return temp;
     }
 
     public Employee findEmployee(String firstName, String lastName) {
-        for (Employee employee : employeeService) {
-            if (employee.getFirstName().equals(firstName) &&
-                    employee.getLastName().equals(lastName)) {
-                return employee;
-            }
+        Employee temp = new Employee(firstName, lastName);
+        if (employeeBook.containsKey(temp.toString())) {
+            return temp;
         }
         throw new EmployeeNotFoundException("Сотрудник не найден!");
     }
 
-    public List<Employee> allEmployee() {
-        return Collections.unmodifiableList(employeeService);
+    public Map<String, Employee> allEmployee() {
+        return employeeBook;
     }
 
     public boolean checkNull(String firstname, String lastname) {

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.Map;
 
 @RequestMapping("/employee")
 @RestController
@@ -44,7 +44,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/all")
-    public List<Employee> all() {
+    public Map<String, Employee> all() {
         return employeeService.allEmployee();
     }
 }
