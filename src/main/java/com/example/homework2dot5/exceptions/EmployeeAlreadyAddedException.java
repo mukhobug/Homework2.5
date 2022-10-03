@@ -1,11 +1,11 @@
-package com.example.homework2dot5;
+package com.example.homework2dot5.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.BAD_REQUEST)
-public class EmployeeNotFoundException extends RuntimeException {
-    public EmployeeNotFoundException(String message) {
+public class EmployeeAlreadyAddedException extends RuntimeException {
+    public EmployeeAlreadyAddedException(String message) {
         super(message);
     }
 }
