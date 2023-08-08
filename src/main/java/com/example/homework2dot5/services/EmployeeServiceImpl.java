@@ -4,6 +4,7 @@ import com.example.homework2dot5.Employee;
 import com.example.homework2dot5.exceptions.EmployeeAlreadyAddedException;
 import com.example.homework2dot5.exceptions.EmployeeNotFoundException;
 import com.example.homework2dot5.exceptions.InvalidInputException;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -37,7 +38,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findEmployee(String firstName, String lastName) {
         checkInput(firstName, lastName);
-        String temp = firstName + " " + lastName;
+        String temp = StringUtils.capitalize(firstName.toLowerCase())
+                + " " + StringUtils.capitalize(lastName.toLowerCase());
         if (employeeBook.containsKey(temp)) {
             return employeeBook.get(temp);
         }

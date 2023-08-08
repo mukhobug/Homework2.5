@@ -18,7 +18,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Employee max(int dep) {
+    public Employee maxSalary(int dep) {
         return employeeService.allEmployee().values().stream()
                 .filter(employee -> employee.getDepartment() == dep)
                 .max(Comparator.comparingInt(Employee::getSalary))
@@ -26,7 +26,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Employee min(int dep) {
+    public Employee minSalary(int dep) {
         return employeeService.allEmployee().values().stream()
                 .filter(employee -> employee.getDepartment() == dep)
                 .min(Comparator.comparingInt(Employee::getSalary))
@@ -34,14 +34,14 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public List<Employee> all(int dep) {
+    public List<Employee> allEmployeeInDepart(int dep) {
         return employeeService.allEmployee().values().stream()
                 .filter(employee -> employee.getDepartment() == dep)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public Map<Integer, List<Employee>> allDepart() {
+    public Map<Integer, List<Employee>> allEmployeeByDepart() {
         return employeeService.allEmployee().values().stream()
                 .collect(Collectors.groupingBy(Employee::getDepartment));
     }
